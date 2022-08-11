@@ -145,6 +145,11 @@ class LudoGame:
         if token == 'none':
             return
 
+        if token_p() == 57:
+            move_token_q()
+        if token_q() == 57:
+            move_token_p()
+
         if player.get_token_stacked() is True:
             move_token_p(roll)
             move_token_q(roll)
