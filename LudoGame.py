@@ -97,10 +97,7 @@ class Player:
 
     def update_token_stacked(self, boolean_value):
         """Updates whether the player's tokens are stacked or not via the passed boolean."""
-        if boolean_value is True:
-            self._token_stacked = True
-        else:
-            self._token_stacked = False
+        self._token_stacked = boolean_value
 
     def get_token_stacked(self):
         """Returns True if player’s tokens are stacked. Otherwise, returns False."""
