@@ -216,6 +216,11 @@ class LudoGame:
             if token_q() == -1:
                 return 'q'
 
+        if token_p() == 57:
+            return 'q'
+        if token_q() == 57:
+            return 'p'
+
         if token_p() == -1 and token_q() == -1:
             return 'none'
 
@@ -228,6 +233,10 @@ class LudoGame:
             if i is not player:
                 if player.get_token_p_step_count() + roll == i.get_token_p_step_count():
                     return 'p'
+                if player.get_token_p_step_count() + roll == i.get_token_q_step_count():
+                    return 'p'
+                if player.get_token_q_step_count() + roll == i.get_token_p_step_count():
+                    return 'q'
                 if player.get_token_q_step_count() + roll == i.get_token_q_step_count():
                     return 'q'
 
