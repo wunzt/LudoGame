@@ -123,7 +123,7 @@ class LudoGame:
     def get_player_by_position(self, player_pos):
         """Takes the position of a player and returns the player object at that position."""
         for i in self._player_object_list:
-            if player_pos is i.get_pos():
+            if player_pos == i.get_pos():
                 return i
 
     def move_token(self, player, token, roll):
@@ -166,13 +166,13 @@ class LudoGame:
             if token_p() not in [-1, 0, 57]:
                 for i in self._player_object_list:
                     if i is current_player:
-                        if i.get_space_name(i.get_token_q_step_count()) is current_player.get_space_name(token_p()):
+                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
                             current_player.update_token_stacked(True)
                     else:
-                        if i.get_space_name(i.get_token_p_step_count()) is current_player.get_space_name(token_p()):
+                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_p()):
                             i.set_token_p_step_count(-1)
                             i.update_token_stacked(False)
-                        if i.get_space_name(i.get_token_q_step_count()) is current_player.get_space_name(token_p()):
+                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
                             i.set_token_q_step_count(-1)
                             i.update_token_stacked(False)
 
@@ -191,13 +191,13 @@ class LudoGame:
             if token_q() not in [-1, 0, 57]:
                 for i in self._player_object_list:
                     if i is current_player:
-                        if i.get_space_name(i.get_token_p_step_count()) is current_player.get_space_name(token_q()):
+                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
                             current_player.update_token_stacked(True)
                     else:
-                        if i.get_space_name(i.get_token_q_step_count()) is current_player.get_space_name(token_q()):
+                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_q()):
                             i.set_token_p_step_count(-1)
                             i.update_token_stacked(False)
-                        if i.get_space_name(i.get_token_p_step_count()) is current_player.get_space_name(token_q()):
+                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
                             i.set_token_q_step_count(-1)
                             i.update_token_stacked(False)
 
