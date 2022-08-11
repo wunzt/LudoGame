@@ -227,10 +227,10 @@ class LudoGame:
             return 'q'
 
         for i in self._player_object_list:
-            if i is not player:
-                if player.get_token_p_step_count() + roll == i.get_token_p_step_count():
+            if i is not self.get_player_by_position(player):
+                if self.get_player_by_position(player).get_token_p_step_count() + roll == i.get_token_p_step_count():
                     return 'p'
-                if player.get_token_q_step_count() + roll == i.get_token_q_step_count():
+                if self.get_player_by_position(player).get_token_q_step_count() + roll == i.get_token_q_step_count():
                     return 'q'
 
         if token_p() != -1 and token_q() == -1:
