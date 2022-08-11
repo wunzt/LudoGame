@@ -136,18 +136,16 @@ class LudoGame:
         stacked) are returned to that player’s ‘H’ space. Any token returned this way will have its stacked value set
         to False."""
 
-        current_player = self.get_player_by_position(player)
+        token_p = player.get_token_p_step_count
+        token_q = player.get_token_q_step_count
 
-        token_p = current_player.get_token_p_step_count
-        token_q = current_player.get_token_q_step_count
-
-        move_token_p = current_player.update_token_p_step_count
-        move_token_q = current_player.update_token_q_step_count
+        move_token_p = player.update_token_p_step_count
+        move_token_q = player.update_token_q_step_count
 
         if token == 'none':
             return
 
-        if current_player.get_token_stacked() is True:
+        if player.get_token_stacked() is True:
             move_token_p(roll)
             move_token_q(roll)
 
@@ -158,21 +156,21 @@ class LudoGame:
             elif token_p() + roll > 57:
                 extra = roll - (57 - token_p())
                 space_index = 57 - extra
-                current_player.set_token_p_step_count(space_index)
+                player.set_token_p_step_count(space_index)
 
             else:
                 move_token_p(roll)
 
             if token_p() not in [-1, 0, 57]:
                 for i in self._player_object_list:
-                    if i is current_player:
-                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
-                            current_player.update_token_stacked(True)
+                    if i is player:
+                        if i.get_space_name(i.get_token_q_step_count()) == player.get_space_name(token_p()):
+                            player.update_token_stacked(True)
                     else:
-                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_p()):
+                        if i.get_space_name(i.get_token_p_step_count()) == player.get_space_name(token_p()):
                             i.set_token_p_step_count(-1)
                             i.update_token_stacked(False)
-                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
+                        if i.get_space_name(i.get_token_q_step_count()) == player.get_space_name(token_p()):
                             i.set_token_q_step_count(-1)
                             i.update_token_stacked(False)
 
@@ -183,21 +181,21 @@ class LudoGame:
             elif token_q() + roll > 57:
                 extra = roll - (57 - token_q())
                 space_index = 57 - extra
-                current_player.set_token_q_step_count(space_index)
+                player.set_token_q_step_count(space_index)
 
             else:
                 move_token_q(roll)
 
             if token_q() not in [-1, 0, 57]:
                 for i in self._player_object_list:
-                    if i is current_player:
-                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
-                            current_player.update_token_stacked(True)
+                    if i is player:
+                        if i.get_space_name(i.get_token_p_step_count()) == player.get_space_name(token_q()):
+                            player.update_token_stacked(True)
                     else:
-                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_q()):
+                        if i.get_space_name(i.get_token_q_step_count()) == player.get_space_name(token_q()):
                             i.set_token_p_step_count(-1)
                             i.update_token_stacked(False)
-                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
+                        if i.get_space_name(i.get_token_p_step_count()) == player.get_space_name(token_q()):
                             i.set_token_q_step_count(-1)
                             i.update_token_stacked(False)
 
@@ -208,8 +206,6 @@ class LudoGame:
         On a 1-5, if either token can move to ‘E’ exactly, it does. Next, if either token can move to a space occupied
         by an opposing token, it will. If both can, the token further from ‘E’ moves. If no conditions have been met,
         the token further from ‘E’ moves."""
-
-        current_player = self.get_player_by_position(player)
 
         token_p = player.get_token_p_step_count
         token_q = player.get_token_q_step_count
@@ -229,10 +225,10 @@ class LudoGame:
             return 'q'
 
         for i in self._player_object_list:
-            if i is not current_player:
-                if current_player.get_token_p_step_count() + roll == i.get_token_p_step_count():
+            if i is not player:
+                if player.get_token_p_step_count() + roll == i.get_token_p_step_count():
                     return 'p'
-                if current_player.get_token_q_step_count() + roll == i.get_token_q_step_count():
+                if player.get_token_q_step_count() + roll == i.get_token_q_step_count():
                     return 'q'
 
         if token_p() != -1 and token_q() == -1:
@@ -264,7 +260,7 @@ class LudoGame:
             token = self.token_algorithm(temp_player, i[1])
 
             if token != 'none':
-                self.move_token(i[0], token, i[1])
+                self.move_token(temp_player, token, i[1])
 
             for pos in self._player_object_list:
                 if pos.get_token_p_step_count() == 57:
