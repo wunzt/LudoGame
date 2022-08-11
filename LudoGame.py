@@ -279,11 +279,3 @@ class LudoGame:
             end_spaces_list.append(token_q)
 
         return end_spaces_list
-
-
-players = ['A', 'B', 'C', 'D']
-turns = []
-game = LudoGame()
-print(game.play_game(players, turns))
-player_B = game.get_player_by_position('B')
-print(player_B.get_space_name(55))
