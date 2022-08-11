@@ -161,8 +161,7 @@ class LudoGame:
             elif token_p() + roll > 57:
                 extra = roll - (57 - token_p())
                 space_index = 57 - extra
-                new_roll = space_index - token_p()
-                move_token_p(new_roll)
+                current_player.set_token_p_step_count(space_index)
 
             else:
                 move_token_p(roll)
@@ -187,8 +186,7 @@ class LudoGame:
             elif token_q() + roll > 57:
                 extra = roll - (57 - token_q())
                 space_index = 57 - extra
-                new_roll = space_index - token_q()
-                move_token_p(new_roll)
+                current_player.set_token_q_step_count(space_index)
 
             else:
                 move_token_q(roll)
