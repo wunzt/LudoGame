@@ -84,16 +84,16 @@ class Player:
                            34, 35, 36, 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'E', 'H']
 
         if self._player_pos == 'A':
-            return player_a_spaces[step_count]
+            return str(player_a_spaces[step_count])
 
         if self._player_pos == 'B':
-            return player_b_spaces[step_count]
+            return str(player_b_spaces[step_count])
 
         if self._player_pos == 'C':
-            return player_c_spaces[step_count]
+            return str(player_c_spaces[step_count])
 
         if self._player_pos == 'D':
-            return player_d_spaces[step_count]
+            return str(player_d_spaces[step_count])
 
     def update_token_stacked(self, boolean_value):
         """Updates whether the player's tokens are stacked or not via the passed boolean."""
@@ -275,7 +275,15 @@ class LudoGame:
             token_p = i.get_space_name(i.get_token_p_step_count())
             token_q = i.get_space_name(i.get_token_q_step_count())
 
-            end_spaces_list.append(str(token_p))
-            end_spaces_list.append(str(token_q))
+            end_spaces_list.append(token_p)
+            end_spaces_list.append(token_q)
 
         return end_spaces_list
+
+
+players = ['A', 'B', 'C', 'D']
+turns = []
+game = LudoGame()
+print(game.play_game(players, turns))
+player_B = game.get_player_by_position('B')
+print(player_B.get_space_name(55))
