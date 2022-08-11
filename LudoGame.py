@@ -142,7 +142,7 @@ class LudoGame:
         to False."""
 
         current_player = self.get_player_by_position(player)
-        if current_player != "Player not found!":
+        if current_player is not "Player not found!":
 
             token_p = current_player.get_token_p_step_count
             token_q = current_player.get_token_q_step_count
@@ -266,7 +266,7 @@ class LudoGame:
 
         for i in turns_list:
             temp_player = self.get_player_by_position(i[0])
-            if temp_player != "Player not found!":
+            if temp_player is not "Player not found!":
                 token = self.token_algorithm(temp_player, i[1])
 
                 if token != 'none':
