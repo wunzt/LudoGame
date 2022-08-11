@@ -123,9 +123,8 @@ class LudoGame:
     def get_player_by_position(self, player_pos):
         """Takes the position of a player and returns the player object at that position."""
         for i in self._player_object_list:
-            if i is not None:
-                if player_pos is i.get_pos():
-                    return i
+            if player_pos is i.get_pos():
+                return i
 
     def move_token(self, player, token, roll):
         """Takes the player as an object, the token name, and the player’s current roll and moves the given token
@@ -145,7 +144,7 @@ class LudoGame:
         move_token_p = current_player.update_token_p_step_count
         move_token_q = current_player.update_token_q_step_count
 
-        if token is 'none':
+        if token == 'none':
             return
 
         if current_player.get_token_stacked() is True:
@@ -210,6 +209,8 @@ class LudoGame:
         by an opposing token, it will. If both can, the token further from ‘E’ moves. If no conditions have been met,
         the token further from ‘E’ moves."""
 
+        current_player = self.get_player_by_position(player)
+
         token_p = player.get_token_p_step_count
         token_q = player.get_token_q_step_count
 
@@ -228,10 +229,10 @@ class LudoGame:
             return 'q'
 
         for i in self._player_object_list:
-            if i is not self.get_player_by_position(player):
-                if self.get_player_by_position(player).get_token_p_step_count() + roll == i.get_token_p_step_count():
+            if i is not current_player:
+                if current_player.get_token_p_step_count() + roll == i.get_token_p_step_count():
                     return 'p'
-                if self.get_player_by_position(player).get_token_q_step_count() + roll == i.get_token_q_step_count():
+                if current_player.get_token_q_step_count() + roll == i.get_token_q_step_count():
                     return 'q'
 
         if token_p() != -1 and token_q() == -1:
