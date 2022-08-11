@@ -121,8 +121,7 @@ class LudoGame:
     def set_player_by_position(self, player_pos):
         """Creates a player object at the passed position and adds it to the player object list."""
         temp_player = Player(player_pos)
-        if temp_player != "Player not found!":
-            self._player_object_list.append(temp_player)
+        self._player_object_list.append(temp_player)
 
     def get_player_by_position(self, player_pos):
         """Takes the position of a player and returns the player object at that position."""
@@ -143,71 +142,72 @@ class LudoGame:
         to False."""
 
         current_player = self.get_player_by_position(player)
+        if current_player != "Player not found!":
 
-        token_p = current_player.get_token_p_step_count
-        token_q = current_player.get_token_q_step_count
+            token_p = current_player.get_token_p_step_count
+            token_q = current_player.get_token_q_step_count
 
-        move_token_p = current_player.update_token_p_step_count
-        move_token_q = current_player.update_token_q_step_count
+            move_token_p = current_player.update_token_p_step_count
+            move_token_q = current_player.update_token_q_step_count
 
-        if token == 'none':
-            return
+            if token == 'none':
+                return
 
-        if current_player.get_token_stacked() is True:
-            move_token_p(roll)
-            move_token_q(roll)
-
-        elif token == 'p':
-            if token_p() == -1:
-                move_token_p(1)
-
-            elif token_p() + roll > 57:
-                extra = roll - (57 - token_p())
-                space_index = 57 - extra
-                new_roll = space_index - token_p()
-                move_token_p(new_roll)
-
-            else:
+            if current_player.get_token_stacked() is True:
                 move_token_p(roll)
-
-            if token_p() not in [-1, 0, 57]:
-                for i in self._player_object_list:
-                    if i == current_player:
-                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
-                            current_player.update_token_stacked(True)
-                    else:
-                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_p()):
-                            i.set_token_p_step_count(-1)
-                            i.update_token_stacked(False)
-                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
-                            i.set_token_q_step_count(-1)
-                            i.update_token_stacked(False)
-
-        else:
-            if token_q() == -1:
-                move_token_q(1)
-
-            elif token_q() + roll > 57:
-                extra = roll - (57 - token_q())
-                space_index = 57 - extra
-                new_roll = space_index - token_q()
-                move_token_p(new_roll)
-
-            else:
                 move_token_q(roll)
 
-            if token_q() not in [-1, 0, 57]:
-                for i in self._player_object_list:
-                    if i == current_player:
-                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
-                            current_player.update_token_stacked(True)
-                    else:
-                        if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_q()):
-                            i.set_token_p_step_count(-1)
-                            i.update_token_stacked(False)
-                        if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
-                            i.set_token_q_step_count(-1)
-                            i.update_token_stacked(False)
+            elif token == 'p':
+                if token_p() == -1:
+                    move_token_p(1)
+
+                elif token_p() + roll > 57:
+                    extra = roll - (57 - token_p())
+                    space_index = 57 - extra
+                    new_roll = space_index - token_p()
+                    move_token_p(new_roll)
+
+                else:
+                    move_token_p(roll)
+
+                if token_p() not in [-1, 0, 57]:
+                    for i in self._player_object_list:
+                        if i == current_player:
+                            if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
+                                current_player.update_token_stacked(True)
+                        else:
+                            if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_p()):
+                                i.set_token_p_step_count(-1)
+                                i.update_token_stacked(False)
+                            if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_p()):
+                                i.set_token_q_step_count(-1)
+                                i.update_token_stacked(False)
+
+            else:
+                if token_q() == -1:
+                    move_token_q(1)
+
+                elif token_q() + roll > 57:
+                    extra = roll - (57 - token_q())
+                    space_index = 57 - extra
+                    new_roll = space_index - token_q()
+                    move_token_p(new_roll)
+
+                else:
+                    move_token_q(roll)
+
+                if token_q() not in [-1, 0, 57]:
+                    for i in self._player_object_list:
+                        if i == current_player:
+                            if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
+                                current_player.update_token_stacked(True)
+                        else:
+                            if i.get_space_name(i.get_token_q_step_count()) == current_player.get_space_name(token_q()):
+                                i.set_token_p_step_count(-1)
+                                i.update_token_stacked(False)
+                            if i.get_space_name(i.get_token_p_step_count()) == current_player.get_space_name(token_q()):
+                                i.set_token_q_step_count(-1)
+                                i.update_token_stacked(False)
 
     def token_algorithm(self, player, roll):
         """Takes the player as an object and the player’s current roll to determine which token should be moved
@@ -265,15 +265,17 @@ class LudoGame:
             i.update_status("Playing")
 
         for i in turns_list:
-            token = self.token_algorithm(self.get_player_by_position(i[0]), i[1])
+            temp_player = self.get_player_by_position(i[0])
+            if temp_player != "Player not found!":
+                token = self.token_algorithm(temp_player, i[1])
 
-            if token != 'none':
-                self.move_token(i[0], token, i[1])
+                if token != 'none':
+                    self.move_token(i[0], token, i[1])
 
-            for pos in self._player_object_list:
-                if pos.get_token_p_step_count() == 57:
-                    if pos.get_token_q_step_count() == 57:
-                        pos.update_status("Finished")
+                for pos in self._player_object_list:
+                    if pos.get_token_p_step_count() == 57:
+                        if pos.get_token_q_step_count() == 57:
+                            pos.update_status("Finished")
 
         for i in self._player_object_list:
             token_p = i.get_space_name(i.get_token_p_step_count())
