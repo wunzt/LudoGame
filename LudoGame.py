@@ -123,7 +123,7 @@ class LudoGame:
     def get_player_by_position(self, player_pos):
         """Takes the position of a player and returns the player object at that position."""
         for i in self._player_object_list:
-            if player_pos == i.get_pos():
+            if player_pos is i.get_pos():
                 return i
 
     def move_token(self, player, token, roll):
