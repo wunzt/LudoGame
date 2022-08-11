@@ -168,7 +168,7 @@ class LudoGame:
 
             if token_p() not in [-1, 0, 57]:
                 for i in self._player_object_list:
-                    if i == current_player:
+                    if i is current_player:
                         if i.get_space_name(i.get_token_q_step_count()) is current_player.get_space_name(token_p()):
                             current_player.update_token_stacked(True)
                     else:
@@ -193,7 +193,7 @@ class LudoGame:
 
             if token_q() not in [-1, 0, 57]:
                 for i in self._player_object_list:
-                    if i == current_player:
+                    if i is current_player:
                         if i.get_space_name(i.get_token_p_step_count()) is current_player.get_space_name(token_q()):
                             current_player.update_token_stacked(True)
                     else:
