@@ -120,13 +120,17 @@ class LudoGame:
 
     def set_player_by_position(self, player_pos):
         """Creates a player object at the passed position and adds it to the player object list."""
-        self._player_object_list.append(Player(player_pos))
+        temp_player = Player(player_pos)
+        if temp_player != "Player not found!":
+            self._player_object_list.append(temp_player)
 
     def get_player_by_position(self, player_pos):
         """Takes the position of a player and returns the player object at that position."""
         for i in self._player_object_list:
             if player_pos == i.get_pos():
                 return i
+            else:
+                return "Player not Found!"
 
     def move_token(self, player, token, roll):
         """Takes the player as an object, the token name, and the player’s current roll and moves the given token
