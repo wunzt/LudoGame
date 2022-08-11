@@ -147,7 +147,7 @@ class LudoGame:
         move_token_p = current_player.update_token_p_step_count
         move_token_q = current_player.update_token_q_step_count
 
-        if token == 'none':
+        if token is 'none':
             return
 
         if current_player.get_token_stacked() is True:
